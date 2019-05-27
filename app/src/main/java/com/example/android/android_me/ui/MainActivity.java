@@ -72,14 +72,9 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
 
                 // Set the list of image id's for the head fragment and set the position to the second image in the list
                 headFragment.setImageIds(AndroidImageAssets.getHeads());
-
                 // Get the correct index to access in the array of head images from the intent
                 // Set the default value to 0
-                int headIndex = getIntent().getIntExtra("headIndex", 0);
-                headFragment.setListIndex(headIndex);
-
                 // Add the fragment to its container using a FragmentManager and a Transaction
-
                 fragmentManager.beginTransaction()
                         .add(R.id.head_container, headFragment)
                         .commit();
@@ -88,18 +83,12 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
 
                 BodyPartFragment bodyFragment = new BodyPartFragment();
                 bodyFragment.setImageIds(AndroidImageAssets.getBodies());
-                int bodyIndex = getIntent().getIntExtra("bodyIndex", 0);
-                bodyFragment.setListIndex(bodyIndex);
-
                 fragmentManager.beginTransaction()
                         .add(R.id.body_container, bodyFragment)
                         .commit();
 
                 BodyPartFragment legFragment = new BodyPartFragment();
                 legFragment.setImageIds(AndroidImageAssets.getLegs());
-                int legIndex = getIntent().getIntExtra("legIndex", 0);
-                legFragment.setListIndex(legIndex);
-
                 fragmentManager.beginTransaction()
                         .add(R.id.leg_container, legFragment)
                         .commit();
@@ -154,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
 
                     // Add the fragment to its container using a FragmentManager and a Transaction
                     fragmentManager.beginTransaction()
-                            .add(R.id.head_container, newFragment)
+                            .add(R.id.body_container, newFragment)
                             .commit();
                     break;
                 case 2:
@@ -165,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
 
                     // Add the fragment to its container using a FragmentManager and a Transaction
                     fragmentManager.beginTransaction()
-                            .add(R.id.head_container, newFragment)
+                            .add(R.id.leg_container, newFragment)
                             .commit();
                     break;
                 default:
@@ -186,27 +175,25 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
                 default:
                     break;
             }
+            // Put this information in a Bundle and attach it to an Intent that will launch an AndroidMeActivity
+            Bundle b = new Bundle();
+            b.putInt("headIndex", headIndex);
+            b.putInt("bodyIndex", bodyIndex);
+            b.putInt("legIndex", legIndex);
+
+            // Attach the Bundle to an intent
+            final Intent intent = new Intent(this, AndroidMeActivity.class);
+            intent.putExtras(b);
+
+            // The "Next" button launches a new AndroidMeActivity
+            Button nextButton = (Button) findViewById(R.id.next_button);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(intent);
+                }
+            });
         }
-
-        // Put this information in a Bundle and attach it to an Intent that will launch an AndroidMeActivity
-        Bundle b = new Bundle();
-        b.putInt("headIndex", headIndex);
-        b.putInt("bodyIndex", bodyIndex);
-        b.putInt("legIndex", legIndex);
-
-        // Attach the Bundle to an intent
-        final Intent intent = new Intent(this, AndroidMeActivity.class);
-        intent.putExtras(b);
-
-        // The "Next" button launches a new AndroidMeActivity
-        Button nextButton = (Button) findViewById(R.id.next_button);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intent);
-            }
-        });
-
     }
 
 }
