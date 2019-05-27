@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
                     newFragment.setImageIds(AndroidImageAssets.getHeads());
                     // Get the correct index to access in the array of head images from the intent
                     // Set the default value to 0
-                    newFragment.setListIndex(headIndex);
+                    newFragment.setListIndex(listIndex);
 
                     // Add the fragment to its container using a FragmentManager and a Transaction
                     fragmentManager.beginTransaction()
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
                     newFragment.setImageIds(AndroidImageAssets.getBodies());
                     // Get the correct index to access in the array of head images from the intent
                     // Set the default value to 0
-                    newFragment.setListIndex(headIndex);
+                    newFragment.setListIndex(listIndex);
 
                     // Add the fragment to its container using a FragmentManager and a Transaction
                     fragmentManager.beginTransaction()
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
                     newFragment.setImageIds(AndroidImageAssets.getLegs());
                     // Get the correct index to access in the array of head images from the intent
                     // Set the default value to 0
-                    newFragment.setListIndex(headIndex);
+                    newFragment.setListIndex(listIndex);
 
                     // Add the fragment to its container using a FragmentManager and a Transaction
                     fragmentManager.beginTransaction()
