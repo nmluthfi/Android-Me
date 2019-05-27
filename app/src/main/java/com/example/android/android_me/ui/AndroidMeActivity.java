@@ -76,6 +76,5 @@ public class AndroidMeActivity extends AppCompatActivity {
                     .add(R.id.leg_container, legFragment)
                     .commit();
         }
-
     }
 }
